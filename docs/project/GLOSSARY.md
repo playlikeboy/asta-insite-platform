@@ -28,3 +28,10 @@
 | **EAS**                 | Expo Application Services, for mobile builds and store submission                                  |
 | **ADR**                 | Architecture Decision Record                                                                       |
 | **SRS**                 | Software Requirements Specification. None is approved yet                                          |
+
+## Sources
+
+| Term      | Meaning                                                                                                                                                                                                                                                    |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Proposal  | The client's revised proposal PDF. Kept outside the repository, because the repository is public                                                                                                                                                           |
+| Blueprint | The developer's planning document (`PRD.md`). Deleted on 2026-11-02 after its content was carried into this handbook. It is no longer an authority; where this handbook says "from the blueprint", the statement is Proposed unless the client confirms it |

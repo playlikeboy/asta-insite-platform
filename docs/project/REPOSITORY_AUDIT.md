@@ -4,18 +4,18 @@ Performed 2026-11-02, before any foundation work.
 
 ## What existed
 
-| Item                          | Finding                                                                                                                    |
-| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| Branch                        | `main`, up to date with `origin/main`                                                                                      |
-| History                       | One commit: `6d0d4cd Initial commit`                                                                                       |
-| Tracked files                 | `README.md`, containing only `# asta-insite-platform`                                                                      |
-| Untracked                     | `.env` with two public values: Appwrite endpoint (`sgp.cloud.appwrite.io`) and project ID. `PRD.md`, the project blueprint |
-| Package manager config        | None                                                                                                                       |
-| Applications and dependencies | None                                                                                                                       |
-| Environment templates         | None                                                                                                                       |
-| CI/CD                         | None                                                                                                                       |
-| `.gitignore`                  | None, so `.env` was at risk of being committed                                                                             |
-| Architecture decisions        | Only as prose in `PRD.md`                                                                                                  |
+| Item                          | Finding                                                                                                                                                                                                                   |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Branch                        | `main`, up to date with `origin/main`                                                                                                                                                                                     |
+| History                       | One commit: `6d0d4cd Initial commit`                                                                                                                                                                                      |
+| Tracked files                 | `README.md`, containing only `# asta-insite-platform`                                                                                                                                                                     |
+| Untracked                     | `.env` with two public values: Appwrite endpoint (`sgp.cloud.appwrite.io`) and project ID. `PRD.md`, the project blueprint, deleted on 2026-11-02 at the owner's request after its content was carried into this handbook |
+| Package manager config        | None                                                                                                                                                                                                                      |
+| Applications and dependencies | None                                                                                                                                                                                                                      |
+| Environment templates         | None                                                                                                                                                                                                                      |
+| CI/CD                         | None                                                                                                                                                                                                                      |
+| `.gitignore`                  | None, so `.env` was at risk of being committed                                                                                                                                                                            |
+| Architecture decisions        | Only as prose in `PRD.md`                                                                                                                                                                                                 |
 
 ## Functional, incomplete, missing
 
