@@ -1,0 +1,361 @@
+openapi: 3.1.0
+info:
+  title: Asta API
+  version: 1.0.0
+  summary: API for the Asta Insite mobile app and admin dashboard.
+  description: >-
+    Only GET /api/health is implemented. All other operations are planned design and carry
+    x-status planned. Prose references are in docs/api. Admin endpoints are listed in
+    docs/api/ADMIN_ENDPOINTS.md and are added here when M9 starts.
+  license:
+    name: Proprietary
+    url: https://github.com/playlikeboy/asta-insite-platform
+servers:
+  - url: http://localhost:3000
+    description: Local development
+security:
+  - bearerAuth: []
+tags:
+  - { name: System, description: Health and reference data }
+  - { name: Identity, description: Current user and profiles }
+  - { name: Providers, description: Provider discovery }
+  - { name: Requirements, description: Customer requirements and connections }
+  - { name: Leads, description: Provider lead discovery and interest }
+  - { name: Content, description: Discovery and media }
+  - { name: Chat, description: Conversations and messages }
+  - { name: Billing, description: Plans, checkout and webhooks }
+paths:
+  /api/health:
+    get:
+      operationId: getHealth
+      tags: [System]
+      summary: Check service and database health
+      description: Implemented.
+      security: []
+      x-status: implemented
+      responses:
+        '200':
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [success, data]
+                properties:
+                  success: { const: true }
+                  data:
+                    type: object
+                    required: [status, database]
+                    properties:
+                      status: { const: ok }
+                      database: { const: up }
+        '503': { $ref: '#/components/responses/Error' }
+  /api/v1/service-categories:
+    get:
+      operationId: listServiceCategories
+      tags: [System]
+      summary: List active service categories
+      security: []
+      x-status: planned
+      responses:
+        '200': { $ref: '#/components/responses/Ok' }
+        '400': { $ref: '#/components/responses/Error' }
+  /api/v1/me:
+    get:
+      operationId: getCurrentUser
+      tags: [Identity]
+      summary: Get the current user and roles
+      x-status: planned
+      responses:
+        '200': { $ref: '#/components/responses/Ok' }
+        '401': { $ref: '#/components/responses/Error' }
+    delete:
+      operationId: requestAccountDeletion
+      tags: [Identity]
+      summary: Begin account deletion
+      x-status: planned
+      responses:
+        '204': { description: Deletion scheduled }
+        '401': { $ref: '#/components/responses/Error' }
+  /api/v1/me/customer-profile:
+    put:
+      operationId: upsertCustomerProfile
+      tags: [Identity]
+      summary: Create or update the customer profile
+      x-status: planned
+      requestBody: { $ref: '#/components/requestBodies/Json' }
+      responses:
+        '200': { $ref: '#/components/responses/Ok' }
+        '422': { $ref: '#/components/responses/Error' }
+  /api/v1/me/provider-profile:
+    put:
+      operationId: upsertProviderProfile
+      tags: [Identity]
+      summary: Create or update the provider profile draft
+      x-status: planned
+      requestBody: { $ref: '#/components/requestBodies/Json' }
+      responses:
+        '200': { $ref: '#/components/responses/Ok' }
+        '422': { $ref: '#/components/responses/Error' }
+  /api/v1/providers:
+    get:
+      operationId: searchProviders
+      tags: [Providers]
+      summary: Search approved providers
+      x-status: planned
+      parameters:
+        - { $ref: '#/components/parameters/Cursor' }
+        - { $ref: '#/components/parameters/Limit' }
+        - { name: categoryId, in: query, schema: { type: string, format: uuid } }
+        - { name: city, in: query, schema: { type: string } }
+      responses:
+        '200': { $ref: '#/components/responses/Ok' }
+        '401': { $ref: '#/components/responses/Error' }
+  /api/v1/providers/{id}:
+    get:
+      operationId: getProvider
+      tags: [Providers]
+      summary: Get a provider's public profile
+      x-status: planned
+      parameters: [{ $ref: '#/components/parameters/Id' }]
+      responses:
+        '200': { $ref: '#/components/responses/Ok' }
+        '404': { $ref: '#/components/responses/Error' }
+  /api/v1/requirements:
+    get:
+      operationId: listOwnRequirements
+      tags: [Requirements]
+      summary: List the customer's own requirements
+      x-status: planned
+      parameters:
+        - { $ref: '#/components/parameters/Cursor' }
+        - { $ref: '#/components/parameters/Limit' }
+      responses:
+        '200': { $ref: '#/components/responses/Ok' }
+        '401': { $ref: '#/components/responses/Error' }
+    post:
+      operationId: createRequirement
+      tags: [Requirements]
+      summary: Create a requirement
+      x-status: planned
+      requestBody: { $ref: '#/components/requestBodies/Json' }
+      responses:
+        '201': { $ref: '#/components/responses/Ok' }
+        '422': { $ref: '#/components/responses/Error' }
+  /api/v1/requirements/{id}/interest:
+    post:
+      operationId: showInterest
+      tags: [Leads]
+      summary: Show interest in a requirement
+      description: Requires lead access. Repeating returns the existing interest.
+      x-status: planned
+      parameters: [{ $ref: '#/components/parameters/Id' }]
+      responses:
+        '201': { $ref: '#/components/responses/Ok' }
+        '403': { $ref: '#/components/responses/Error' }
+        '409': { $ref: '#/components/responses/Error' }
+  /api/v1/interests/{id}/accept:
+    post:
+      operationId: acceptInterest
+      tags: [Requirements]
+      summary: Accept an interest and open a connection
+      x-status: planned
+      parameters: [{ $ref: '#/components/parameters/Id' }]
+      responses:
+        '200': { $ref: '#/components/responses/Ok' }
+        '404': { $ref: '#/components/responses/Error' }
+        '409': { $ref: '#/components/responses/Error' }
+  /api/v1/leads:
+    get:
+      operationId: listLeads
+      tags: [Leads]
+      summary: List leads matching the provider
+      description: Requires lead access. Contact details are never included.
+      x-status: planned
+      parameters:
+        - { $ref: '#/components/parameters/Cursor' }
+        - { $ref: '#/components/parameters/Limit' }
+      responses:
+        '200': { $ref: '#/components/responses/Ok' }
+        '403': { $ref: '#/components/responses/Error' }
+  /api/v1/feed:
+    get:
+      operationId: getFeed
+      tags: [Content]
+      summary: Get the discovery feed
+      x-status: planned
+      parameters:
+        - { $ref: '#/components/parameters/Cursor' }
+        - { $ref: '#/components/parameters/Limit' }
+      responses:
+        '200': { $ref: '#/components/responses/Ok' }
+        '401': { $ref: '#/components/responses/Error' }
+  /api/v1/media/uploads:
+    post:
+      operationId: createUpload
+      tags: [Content]
+      summary: Validate and prepare a file upload
+      x-status: planned
+      requestBody: { $ref: '#/components/requestBodies/Json' }
+      responses:
+        '201': { $ref: '#/components/responses/Ok' }
+        '422': { $ref: '#/components/responses/Error' }
+  /api/v1/conversations:
+    get:
+      operationId: listConversations
+      tags: [Chat]
+      summary: List the user's conversations
+      x-status: planned
+      parameters:
+        - { $ref: '#/components/parameters/Cursor' }
+        - { $ref: '#/components/parameters/Limit' }
+      responses:
+        '200': { $ref: '#/components/responses/Ok' }
+        '401': { $ref: '#/components/responses/Error' }
+  /api/v1/conversations/{id}/messages:
+    get:
+      operationId: listMessages
+      tags: [Chat]
+      summary: List messages in a conversation
+      x-status: planned
+      parameters:
+        - { $ref: '#/components/parameters/Id' }
+        - { $ref: '#/components/parameters/Cursor' }
+        - { $ref: '#/components/parameters/Limit' }
+      responses:
+        '200': { $ref: '#/components/responses/Ok' }
+        '404': { $ref: '#/components/responses/Error' }
+    post:
+      operationId: sendMessage
+      tags: [Chat]
+      summary: Send a message
+      description: Idempotent on clientKey.
+      x-status: planned
+      parameters: [{ $ref: '#/components/parameters/Id' }]
+      requestBody: { $ref: '#/components/requestBodies/Json' }
+      responses:
+        '201': { $ref: '#/components/responses/Ok' }
+        '404': { $ref: '#/components/responses/Error' }
+  /api/v1/subscription-plans:
+    get:
+      operationId: listPlans
+      tags: [Billing]
+      summary: List active plans
+      x-status: planned
+      responses:
+        '200': { $ref: '#/components/responses/Ok' }
+        '401': { $ref: '#/components/responses/Error' }
+  /api/v1/subscriptions/checkout:
+    post:
+      operationId: startCheckout
+      tags: [Billing]
+      summary: Start a subscription checkout
+      description: Does not activate anything. Only a verified billing event does.
+      x-status: planned
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema: { type: string, minLength: 8, maxLength: 128 }
+      requestBody: { $ref: '#/components/requestBodies/Json' }
+      responses:
+        '201': { $ref: '#/components/responses/Ok' }
+        '403': { $ref: '#/components/responses/Error' }
+        '409': { $ref: '#/components/responses/Error' }
+  /api/webhooks/razorpay:
+    post:
+      operationId: receiveRazorpayWebhook
+      tags: [Billing]
+      summary: Receive Razorpay events
+      description: Authenticated by X-Razorpay-Signature over the raw body.
+      security: []
+      x-status: planned
+      parameters:
+        - name: X-Razorpay-Signature
+          in: header
+          required: true
+          schema: { type: string }
+        - name: x-razorpay-event-id
+          in: header
+          required: true
+          schema: { type: string }
+      requestBody: { $ref: '#/components/requestBodies/Json' }
+      responses:
+        '200': { description: Accepted or duplicate }
+        '400': { $ref: '#/components/responses/Error' }
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: Appwrite JWT
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema: { type: string, format: uuid }
+    Cursor:
+      name: cursor
+      in: query
+      schema: { type: string, minLength: 1, maxLength: 512 }
+    Limit:
+      name: limit
+      in: query
+      schema: { type: integer, minimum: 1, maximum: 100, default: 20 }
+  requestBodies:
+    Json:
+      required: true
+      content:
+        application/json:
+          schema: { type: object }
+  responses:
+    Ok:
+      description: Success envelope. Payload schemas are added as each milestone is built.
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [success, data]
+            properties:
+              success: { const: true }
+              data: {}
+              meta: { $ref: '#/components/schemas/PageMeta' }
+    Error:
+      description: Error envelope
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorEnvelope' }
+  schemas:
+    PageMeta:
+      type: object
+      required: [nextCursor, limit]
+      properties:
+        nextCursor: { type: [string, 'null'] }
+        limit: { type: integer }
+    ErrorEnvelope:
+      type: object
+      required: [success, error]
+      properties:
+        success: { const: false }
+        error:
+          type: object
+          required: [code, message]
+          properties:
+            code:
+              type: string
+              enum:
+                - VALIDATION_FAILED
+                - UNAUTHENTICATED
+                - FORBIDDEN
+                - NOT_FOUND
+                - CONFLICT
+                - RATE_LIMITED
+                - INTERNAL_ERROR
+                - SERVICE_UNAVAILABLE
+            message: { type: string }
+            fields:
+              type: object
+              additionalProperties:
+                type: array
+                items: { type: string }
