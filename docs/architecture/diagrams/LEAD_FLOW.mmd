@@ -1,0 +1,17 @@
+sequenceDiagram
+  actor C as Customer
+  actor P as Provider
+  participant API
+  participant DB as PostgreSQL
+  C->>API: POST /requirements
+  API->>DB: requirement active, answers, outbox
+  P->>API: GET /leads?category&location
+  API->>DB: Match categories and area, require lead access
+  API-->>P: Leads with contact details hidden
+  P->>API: POST /requirements/:id/interest
+  API->>DB: Insert interest (unique), outbox
+  API-->>C: Notification
+  C->>API: POST /interests/:id/accept
+  API->>DB: Transaction: interest accepted, connection, conversation, members, outbox
+  API-->>P: Notification
+  API-->>C: Conversation ID

@@ -1,0 +1,18 @@
+sequenceDiagram
+  actor U as User
+  participant App
+  participant AW as Appwrite Auth
+  participant API
+  participant DB as PostgreSQL
+  U->>App: Enter phone
+  App->>AW: createPhoneToken
+  AW-->>U: SMS code
+  U->>App: Enter code
+  App->>AW: createSession
+  App->>AW: createJWT (15 minutes)
+  App->>API: GET /api/v1/me, Bearer JWT
+  API->>AW: account.get() with JWT
+  AW-->>API: Appwrite user
+  API->>DB: Find or create users row, load profiles
+  API->>API: Reject if suspended or deleted
+  API-->>App: User and roles

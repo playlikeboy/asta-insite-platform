@@ -1,0 +1,12 @@
+flowchart TB
+  C[Customer] --> APP[Asta Insite mobile app]
+  P[Service provider] --> APP
+  AD[Administrator] --> WEB[Asta Insite Admin]
+  APP --> CORE[Asta Core]
+  WEB --> CORE
+  CORE --> AW[Appwrite Cloud]
+  CORE --> RP[Razorpay]
+  AW --> SMS[SMS: Appwrite phone OTP or MSG91]
+  AW --> EM[Email: Resend]
+  AW --> PUSH[FCM and APNs]
+  APP --> STORES[App Store and Google Play]

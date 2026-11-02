@@ -1,0 +1,17 @@
+flowchart TD
+  A[Install and open] --> B[Sign in: phone, email or social]
+  B --> C[Choose categories and basic profile]
+  C --> D[Home]
+  D --> E[Explore content]
+  E --> F[Save content]
+  D --> G[Post requirement wizard]
+  G --> H[Requirement active]
+  H --> I[Provider shows interest]
+  I --> J[Review portfolio and ratings]
+  J --> K{Decision}
+  K -- Shortlist --> J
+  K -- Decline --> H
+  K -- Accept --> L[Connection and chat]
+  L --> M[Discuss, share documents, schedule]
+  M --> N[Close requirement]
+  N --> O[Review provider]

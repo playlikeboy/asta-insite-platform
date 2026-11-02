@@ -1,0 +1,26 @@
+sequenceDiagram
+  actor P as Provider
+  participant App
+  participant API
+  participant DB as PostgreSQL
+  participant RP as Razorpay
+  P->>App: Choose plan
+  App->>API: POST /subscriptions/checkout (idempotency key)
+  API->>API: Check approved, no active subscription
+  API->>RP: Create subscription
+  API->>DB: subscription = pending
+  API-->>App: Checkout details
+  App->>RP: Complete payment
+  App-->>P: "Confirming payment"
+  RP->>API: Signed webhook
+  API->>API: Verify signature on raw body
+  API->>DB: Insert event ID (unique)
+  alt New event
+    API->>DB: Transaction: payment, subscription active, invoice, outbox
+    API-->>RP: 200
+  else Duplicate
+    API-->>RP: 200, no change
+  end
+  App->>API: GET /subscriptions/current
+  API-->>App: active
+  Note over App,API: The client's success callback never activates anything

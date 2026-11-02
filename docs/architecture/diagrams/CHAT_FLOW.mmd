@@ -1,0 +1,17 @@
+sequenceDiagram
+  actor A as Sender
+  actor B as Recipient
+  participant API
+  participant DB as PostgreSQL
+  participant TB as TablesDB
+  participant RT as Realtime
+  A->>API: POST /conversations/:id/messages
+  API->>API: Check member, connection open, account active
+  API->>DB: Transaction: message (idempotent), outbox
+  API-->>A: Saved message
+  API->>TB: Update B's signal row
+  TB->>RT: Row update event
+  RT-->>B: Signal (no content)
+  B->>API: GET messages after cursor
+  API-->>B: New messages
+  Note over DB,B: Offline: outbox sends push. Foreground: app always refetches

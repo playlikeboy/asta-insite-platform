@@ -1,0 +1,21 @@
+flowchart TD
+  A[Register] --> B[Business details, categories, area]
+  B --> C[Submit documents]
+  C --> D{Admin review}
+  D -- Rejected --> B
+  D -- Approved --> E[Choose plan and pay]
+  E --> F{Payment verified by webhook}
+  F -- Failed --> E
+  F -- Active --> G[Dashboard]
+  G --> H[Build portfolio and post content]
+  G --> I[Available for leads on]
+  I --> J[Browse and filter leads]
+  J --> K[Show Interest]
+  K --> L{Customer response}
+  L -- Declined --> J
+  L -- Accepted --> M[Chat and send quote]
+  M --> N[Receive review]
+  G --> O{Subscription expires}
+  O -- Renewed --> G
+  O -- Lapsed --> P[Lead access stops; profile stays]
+  P --> E

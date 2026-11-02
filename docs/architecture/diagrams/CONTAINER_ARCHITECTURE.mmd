@@ -1,0 +1,27 @@
+flowchart LR
+  subgraph Devices
+    M[Expo app]
+    B[Admin browser]
+  end
+  subgraph Appwrite project
+    S[Sites: Next.js]
+    F[Functions: cron]
+    PG[(PostgreSQL)]
+    TB[(TablesDB: user_signals)]
+    RT[Realtime]
+    AU[Auth]
+    ST[Storage]
+    MS[Messaging]
+  end
+  M -- JWT, /api/v1 --> S
+  B -- cookie --> S
+  M -- sign in --> AU
+  M -- upload --> ST
+  M -- subscribe --> RT
+  S -- pooled 6432 --> PG
+  S -- verify --> AU
+  S -- API key --> TB
+  TB --> RT
+  S -- API key --> MS
+  S -- file tokens --> ST
+  F -- secret header --> S
