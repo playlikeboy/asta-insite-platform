@@ -1,0 +1,10 @@
+pnpm-lock.yaml
+.next
+.expo
+.turbo
+coverage
+playwright-report
+test-results
+packages/database/migrations
+*.mmd
+apps/mobile/src/uniwind-types.d.ts

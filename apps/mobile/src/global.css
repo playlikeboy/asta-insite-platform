@@ -1,0 +1,37 @@
+@import 'tailwindcss';
+@import 'uniwind';
+@import 'heroui-native/styles';
+@import '@asta/design-tokens/tokens.css';
+
+@theme {
+  --font-manrope: 'Manrope_400Regular';
+  --font-manrope-medium: 'Manrope_500Medium';
+  --font-manrope-bold: 'Manrope_700Bold';
+}
+
+/* Maps HeroUI Native's semantic variables to the brand. Values mirror @asta/design-tokens. */
+@layer theme {
+  :root {
+    @variant light {
+      --background: #f5f2ea;
+      --foreground: #182b3b;
+      --surface: #ffffff;
+      --surface-foreground: #182b3b;
+      --overlay: #ffffff;
+      --overlay-foreground: #182b3b;
+      --muted: #6f6e69;
+      --default: #eceae4;
+      --default-foreground: #182b3b;
+      --accent: #8f5338;
+      --accent-foreground: #ffffff;
+      --success: #4f6354;
+      --success-foreground: #ffffff;
+      --danger: #a4312a;
+      --danger-foreground: #ffffff;
+      --border: #cfccc4;
+      --separator: #cfccc4;
+      --link: #8f5338;
+      --field-border: #cfccc4;
+    }
+  }
+}

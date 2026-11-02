@@ -1,0 +1,15 @@
+{
+  "$schema": "https://turborepo.dev/schema.json",
+  "globalEnv": ["NODE_ENV"],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "!.next/cache/**"],
+      "env": ["DATABASE_URL"]
+    },
+    "lint": {},
+    "typecheck": {},
+    "test": { "env": ["TEST_DATABASE_URL"] },
+    "dev": { "cache": false, "persistent": true }
+  }
+}

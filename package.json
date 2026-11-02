@@ -1,0 +1,29 @@
+{
+  "name": "asta-insite-platform",
+  "private": true,
+  "packageManager": "pnpm@12.6.0",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "test:e2e": "pnpm --filter web test:e2e",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "docs:check": "node scripts/check-docs.mjs",
+    "db:generate": "pnpm --filter @asta/database db:generate",
+    "db:migrate": "pnpm --filter @asta/database db:migrate",
+    "test:coverage": "vitest run --coverage"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "5.0.5",
+    "prettier": "3.9.10",
+    "turbo": "2.11.10",
+    "typescript": "~6.0.3",
+    "vitest": "5.0.5"
+  }
+}

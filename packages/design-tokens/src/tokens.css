@@ -1,0 +1,15 @@
+/* Shared by apps/web (Tailwind v4) and apps/mobile (Uniwind). index.ts mirrors these values. */
+@theme {
+  --color-navy: #182b3b;
+  --color-ivory: #f5f2ea;
+  --color-white: #ffffff;
+  --color-terracotta-500: #b87555;
+  --color-terracotta-700: #8f5338;
+  --color-sage-500: #6d8272;
+  --color-sage-700: #4f6354;
+  --color-gray-100: #eceae4;
+  --color-gray-300: #cfccc4;
+  --color-gray-500: #6f6e69;
+  --color-gray-700: #45443f;
+  --color-critical: #a4312a;
+}
