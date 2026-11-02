@@ -23,7 +23,7 @@ tags:
   - { name: Leads, description: Provider lead discovery and interest }
   - { name: Content, description: Discovery and media }
   - { name: Chat, description: Conversations and messages }
-  - { name: Billing, description: Plans, checkout and webhooks }
+  - { name: Billing, description: 'Plans, checkout and webhooks' }
 paths:
   /api/health:
     get:
