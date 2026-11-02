@@ -42,7 +42,7 @@ Short and purposeful: 150 to 250 ms. No decorative animation. Respect reduced mo
 
 ## Icons
 
-Lucide on both platforms: `lucide-react` on web, `lucide-react-native` on mobile when first needed. 20 to 24 px. Icon-only buttons need an accessible label.
+Lucide on both platforms: `lucide-react` on web, `lucide-react-native` on mobile. 20 to 24 px. Icon-only buttons need an accessible label.
 
 ## Process before UI is built
 

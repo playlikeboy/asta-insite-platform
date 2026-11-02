@@ -1,6 +1,6 @@
 # Admin Endpoints
 
-Status: Planned for M9 and M10. Session cookie, completed MFA, a row in `admin_users`, and the role listed. Admin pages may call services directly; these routes are for client interactions and exports. Every write adds an audit log row.
+Status: Planned for M4 (provider approvals), M9 and M10. Session cookie, completed MFA, a row in `admin_users`, and the role listed. Admin pages may call services directly; these routes are for client interactions and exports. Every write adds an audit log row.
 
 | Method                   | Path                                                                | Role        | Purpose                              |
 | ------------------------ | ------------------------------------------------------------------- | ----------- | ------------------------------------ |
