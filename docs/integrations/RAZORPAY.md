@@ -34,7 +34,7 @@ Separate test and live credentials. Live credentials go to production only.
 
 ## When it is down
 
-Checkout shows "Payments are temporarily unavailable." Existing subscriptions continue, since access is computed from `current_period_end` in our database. A renewal grace period applies (see [Subscription model](../product/SUBSCRIPTION_MODEL.md)).
+Checkout shows "Payments are temporarily unavailable." Existing subscriptions continue, since access is computed from `current_period_end` in our database. A renewal grace period applies only if D-04 sets one (see [Subscription model](../product/SUBSCRIPTION_MODEL.md)).
 
 ## Testing
 

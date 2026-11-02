@@ -75,10 +75,11 @@ Money is stored as integer paise, never floats.
 
 ## Reputation (Planned)
 
-| Table                    | Columns                                                                                            | Notes                                 |
-| ------------------------ | -------------------------------------------------------------------------------------------------- | ------------------------------------- |
-| `reviews`                | `connection_id` unique, `provider_id`, `customer_user_id`, `rating` check 1 to 5, `body`, `status` |                                       |
-| `provider_profile_views` | `provider_id`, `viewer_user_id`, `viewed_on` date                                                  | Unique per day, so counts stay honest |
+| Table                    | Columns                                                                                            | Notes                                                    |
+| ------------------------ | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| `reviews`                | `connection_id` unique, `provider_id`, `customer_user_id`, `rating` check 1 to 5, `body`, `status` |                                                          |
+| `provider_profile_views` | `provider_id`, `viewer_user_id`, `viewed_on` date                                                  | Unique per day, so counts stay honest                    |
+| `lead_views`             | `provider_id`, `requirement_id`, `viewed_at`                                                       | Optional. Add only if lead analytics need it, per flow 6 |
 
 ## Platform (Planned)
 

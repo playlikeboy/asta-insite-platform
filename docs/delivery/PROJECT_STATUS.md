@@ -57,3 +57,7 @@ Rerun before trusting these numbers.
 ## Next milestone
 
 M1. See [Roadmap](IMPLEMENTATION_ROADMAP.md#m1-environments-and-spikes).
+
+## Documentation checks on 2026-11-02
+
+Links and anchors resolve (`pnpm docs:check`, plus a one-off anchor check). OpenAPI lints valid with 2 warnings: the localhost server URL, and no 4XX on the health route. All 13 Mermaid diagrams parse with Mermaid 11. Referenced IDs (D-, A-, S-, BR-, ADR-) all exist.

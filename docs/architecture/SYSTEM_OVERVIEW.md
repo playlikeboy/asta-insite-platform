@@ -12,7 +12,7 @@ flowchart LR
     M[Mobile app: Expo]
     A[Admin browser]
   end
-  subgraph Appwrite Cloud, Singapore
+  subgraph appwrite["Appwrite Cloud, Singapore"]
     S[Sites: Next.js admin + API]
     PG[(Native PostgreSQL: all business data)]
     AU[Auth]

@@ -9,6 +9,8 @@ erDiagram
   users ||--o| admin_users : has
   users ||--o{ notifications : receives
   users ||--o{ saved_content : saves
+  users ||--o{ customer_categories : selects
+  service_categories ||--o{ customer_categories : ""
   users ||--o{ media_assets : owns
   users ||--o{ conversation_members : joins
 
@@ -17,6 +19,7 @@ erDiagram
   service_categories ||--o{ requirements : ""
   provider_profiles ||--o{ provider_categories : ""
   provider_profiles ||--o{ service_areas : ""
+  provider_profiles ||--o{ provider_credentials : ""
 
   customer_profiles ||--o{ requirements : posts
   requirements ||--o{ requirement_answers : ""
@@ -45,6 +48,8 @@ erDiagram
   content_posts ||--o{ saved_content : ""
   content_posts ||--o{ content_reports : ""
   provider_profiles ||--o{ provider_profile_views : ""
+  provider_profiles ||--o{ lead_views : ""
+  requirements ||--o{ lead_views : ""
 
   subscription_plans ||--o{ subscriptions : ""
   provider_profiles ||--o{ subscriptions : ""

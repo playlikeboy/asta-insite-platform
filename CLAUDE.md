@@ -27,7 +27,7 @@ pnpm workspaces and Turborepo; TypeScript 6; Next.js 16 with shadcn/ui and Tailw
 
 ## Security
 
-- **Never commit or print secrets**, `.env` files, real phone numbers, client PDFs or `PRD.md`. The repository is public.
+- **Never commit or print secrets**, `.env` files, real phone numbers or client PDFs. The repository is public.
 - `EXPO_PUBLIC_*` ships inside the app, so never put a secret there.
 - Do not deploy or connect to production without credentials and explicit authorization.
 - `TEST_DATABASE_URL` is destructive. Point it only at a throwaway database.

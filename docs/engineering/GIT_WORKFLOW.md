@@ -20,7 +20,7 @@ git diff --staged    # Read it. Look for secrets.
 ## Never
 
 - Force-push `main`, or reset or discard others' work.
-- Commit `.env` files, keys, client PDFs, `PRD.md` or real user data.
+- Commit `.env` files, keys, client PDFs or real user data.
 - Skip hooks or CI to get past a failure.
 - Bundle unrelated changes.
 
